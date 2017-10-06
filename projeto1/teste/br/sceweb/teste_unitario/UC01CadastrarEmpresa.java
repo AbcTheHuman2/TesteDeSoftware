@@ -23,9 +23,26 @@ public class UC01CadastrarEmpresa {
 		empresa.setEndereco("rua taquari");
 		empresa.setTelefone("2222");
 	}
+	
+	/**
+	 * CT01UC01FBCadastra_com_sucesso
+	 * Objetivo - verificar o comportamento do sistema para o cadastro de
+	 * empresa com sucesso
+	 */
 	@Test
 	public void CT01UC01FBCadastra_com_sucesso() {
 		assertEquals(1,empresaDAO.adiciona(empresa));
+	}
+	
+	@Test
+	public void CT02UC01FBCadastra_com_cnpj_invalido() {
+		assertEquals("CNPJ invalido.",empresa.setCnpj("8942"));
+	}
+	
+	@Test
+	public void CT03UC01FBCadastra_com_cnpj_ja_cadastrado() {
+		empresaDAO.adiciona(empresa);
+		assertEquals(0, empresaDAO.adiciona(empresa));
 	}
 	
 	@AfterClass
